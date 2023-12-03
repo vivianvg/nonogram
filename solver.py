@@ -1,5 +1,4 @@
 """
-
 brainstorming approach
 * at each iteration, return a new board? and pass to same input function
 * always find a deterministic move 
@@ -41,6 +40,11 @@ def next_move(nonogram: dict, board: np.ndarray, size) -> list:
 
     questions:
     2. how do we track all the diff possibilities
+    4. determining how many combinations of possibilities?
+        total = sum(conditions) + len(conditions)
+        eg. (2, 2, 2) has 10 diff placements
+        TODO confirm that the total determines the # of combinations?
+        for 10 cells, total=11 => 1 way, total=10 => 2 ways, total=9 => 10 ways
     """
     moves = []
 
@@ -64,7 +68,7 @@ def place_array(conditions: list, size: int, start: int = 0) -> list:
     i.e. only one way to fill cells in a row or column
 
     questions:
-    1. we expect recurisive? be able to handle less than n, so we need a start index
+    1. we expect recursive? be able to handle less than n, so we need a start index
 
     """
     fill = np.zeros((size, 1), dtype=np.int8)
@@ -88,7 +92,7 @@ def place_array(conditions: list, size: int, start: int = 0) -> list:
     return fill
 
 
-# TODO double check if this is inefficient to pass baords back
+# TODO double check if this is inefficient to pass boards back
 def place_cell(board: np.ndarray, coord: tuple, size) -> np.ndarray:
     """"""
     x, y = coord
@@ -107,7 +111,6 @@ def display(board: np.ndarray):
 
 def main():
     solve_nonogram(INPUT_1_5, 5)
-
 
 if __name__ == "__main__":
     main()
